@@ -14,9 +14,14 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
 
     fun toLike(movieId: Long) = repository.like(movieId)
 
-    val navigateToMovieFrag = SingleLiveEvent<Movie>()
+    val navigateToMovieFragEvent = SingleLiveEvent<Movie>()
     fun goToMovieFragment(movie: Movie) {
-        navigateToMovieFrag.value = movie
+        navigateToMovieFragEvent.value = movie
     }
+
+    fun showFavorites() = repository.showFavorite()
+    fun showAll() = repository.showAll()
+
+
 
 }

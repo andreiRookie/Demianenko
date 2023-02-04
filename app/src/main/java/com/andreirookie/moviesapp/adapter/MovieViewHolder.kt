@@ -18,5 +18,9 @@ class MovieViewHolder(
             listener.onLikeClick(movie)
         }
 
+        binding.root.setOnClickListener() {
+            listener.onMovieItemBindingClick(movie)
+        }
+
     }
 }

@@ -39,6 +39,7 @@ class FeedFragment : Fragment() {
                     viewModel.goToMovieFragment(movie)
                 }
 
+
             }
         )
 
@@ -51,13 +52,30 @@ class FeedFragment : Fragment() {
         val simpleItemAnimator = binding.recyclerView.itemAnimator as SimpleItemAnimator
         simpleItemAnimator.supportsChangeAnimations = false
 
-        viewModel.navigateToMovieFrag.observe(viewLifecycleOwner) {
-
+        viewModel.navigateToMovieFragEvent.observe(viewLifecycleOwner) {
+//            val navHostFragment =
+//                activity?.supportFragmentManager?.
+//                findFragmentById(R.id.from_feedFragment_to_movieFragment) as NavHostFragment
+//
+//           navHostFragment.navController.navigate(
+//                R.id.from_feedFragment_to_movieFragment,
+//                Bundle().apply { movieArg = it }
+//            )
             findNavController().navigate(
                 R.id.from_feedFragment_to_movieFragment,
                 Bundle().apply { movieArg = it }
             )
         }
+
+        binding.favoriteButton.setOnClickListener{
+            viewModel.showFavorites()
+        }
+
+        binding.popularButton.setOnClickListener {
+            viewModel.showAll()
+        }
+
+
 
 
 

@@ -6,4 +6,6 @@ import com.andreirookie.moviesapp.data.Movie
 interface MovieRepository {
     fun getTopPopular(): LiveData<List<Movie>>
     fun like(movieId: Long)
+    fun showFavorite()
+    fun showAll()
 }

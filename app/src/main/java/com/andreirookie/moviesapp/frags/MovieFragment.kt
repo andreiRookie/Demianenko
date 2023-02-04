@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.andreirookie.moviesapp.data.Movie
 import com.andreirookie.moviesapp.databinding.MovieFragmentBinding
 import com.andreirookie.moviesapp.util.MovieArg
@@ -30,6 +31,10 @@ class MovieFragment : Fragment() {
                 movieGenre.text = it.genre
 
             }
+        }
+
+        binding.toBackImageView.setOnClickListener {
+            findNavController().navigateUp()
         }
 
 

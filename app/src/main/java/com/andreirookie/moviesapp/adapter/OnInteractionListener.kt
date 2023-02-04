@@ -7,4 +7,8 @@ interface OnInteractionListener {
     fun onLikeClick(movie: Movie)
 
     fun onMovieItemBindingClick(movie: Movie)
+
+
+
+
 }

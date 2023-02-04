@@ -33,4 +33,12 @@ class MovieRepoInMemory : MovieRepository {
         }
         data.value = movies
     }
+
+    override fun showFavorite() {
+        data.value = movies.filter {it.isLiked}
+    }
+
+    override fun showAll() {
+        data.value = movies
+    }
 }
