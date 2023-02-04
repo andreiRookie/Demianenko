@@ -32,7 +32,7 @@ class FeedFragment : Fragment() {
         val adapter = MovieAdapter(
             object  : OnInteractionListener {
                 override fun onLikeClick(movie: Movie) {
-                    viewModel.toLike(movie.id)
+                    viewModel.toLike(movie)
                 }
 
                 override fun onMovieItemBindingClick(movie: Movie) {
@@ -53,14 +53,6 @@ class FeedFragment : Fragment() {
         simpleItemAnimator.supportsChangeAnimations = false
 
         viewModel.navigateToMovieFragEvent.observe(viewLifecycleOwner) {
-//            val navHostFragment =
-//                activity?.supportFragmentManager?.
-//                findFragmentById(R.id.from_feedFragment_to_movieFragment) as NavHostFragment
-//
-//           navHostFragment.navController.navigate(
-//                R.id.from_feedFragment_to_movieFragment,
-//                Bundle().apply { movieArg = it }
-//            )
             findNavController().navigate(
                 R.id.from_feedFragment_to_movieFragment,
                 Bundle().apply { movieArg = it }
