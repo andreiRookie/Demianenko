@@ -3,7 +3,7 @@ package com.andreirookie.moviesapp.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.andreirookie.moviesapp.data.Movie
+import com.andreirookie.moviesapp.dto.Movie
 import com.andreirookie.moviesapp.databinding.MovieItemBinding
 
 class MovieAdapter(

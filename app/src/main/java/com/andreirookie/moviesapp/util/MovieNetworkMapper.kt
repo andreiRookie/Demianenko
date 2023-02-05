@@ -1,7 +1,7 @@
-package com.andreirookie.moviesapp.network
+package com.andreirookie.moviesapp.util
 
-import com.andreirookie.moviesapp.data.Movie
-import com.andreirookie.moviesapp.util.MovieEntityMapper
+import com.andreirookie.moviesapp.dto.Movie
+import com.andreirookie.moviesapp.network.MovieNetworkEntity
 
 class MovieNetworkMapper : MovieEntityMapper<MovieNetworkEntity, Movie> {
     override fun mapFromEntity(entity: MovieNetworkEntity): Movie {
@@ -10,9 +10,11 @@ class MovieNetworkMapper : MovieEntityMapper<MovieNetworkEntity, Movie> {
             title = entity.nameRu ?: "",
             image = entity.posterUrl ?: "",
             issueYear = entity.year ?: 0,
-            genre = entity.genres?.toString() ?: "",
-            description = entity.description ?: "",
-            country = entity.countries?.toString() ?: ""
+            genre = entity.genres?.first()?.genre?.replaceFirstChar { it.uppercase() } ?: "",
+//            genre = entity.genres?.joinToString { "${it.genre} " } ?: "",
+            description = entity.shortDescription ?: "",
+            country = entity.countries?.first()?.country?.replaceFirstChar { it.uppercase() } ?: ""
+//            country = entity.countries?.joinToString { "${it.country} " } ?: ""
         )
     }
 

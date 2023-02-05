@@ -1,38 +1,27 @@
 package com.andreirookie.moviesapp.network
 
-import com.andreirookie.moviesapp.data.Movie
-import com.andreirookie.moviesapp.db.MovieEntity
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
 data class MovieNetworkEntity(
     @SerializedName("kinopoiskId")
     val kinopoiskId: Int?,
-
     @SerializedName("imdbId")
     val imdbId: String?,
-
     @SerializedName("nameRu")
     val nameRu: String?,
-
     @SerializedName("nameEn")
     val nameEn: String?,
-
     @SerializedName("nameOriginal")
     val nameOriginal: String?,
-
     @SerializedName("posterUrl")
     val posterUrl: String?,
-
     @SerializedName("posterUrlPreview")
     val posterUrlPreview: String?,
-
     @SerializedName("coverUrl")
     val coverUrl: String?,
-
     @SerializedName("logoUrl")
     val logoUrl: String?,
-
     @SerializedName("reviewsCount")
     val reviewsCount: Int?,
     @SerializedName("ratingGoodReview")
@@ -90,9 +79,9 @@ data class MovieNetworkEntity(
     @SerializedName("lastSync")
     val lastSync: String?,
     @SerializedName("countries")
-    val countries: List<Any>?,
+    val countries: List<Country>?,
     @SerializedName("genres")
-    val genres: List<Any>?,
+    val genres: List<Genre>?,
     @SerializedName("startYear")
     val startYear: Int?,
     @SerializedName("endYear")
@@ -104,13 +93,21 @@ data class MovieNetworkEntity(
     @SerializedName("completed")
     val completed: Boolean?
 )  : Serializable {
-    fun toDto() = Movie(
-        id = kinopoiskId ?: 0,
-        title = nameRu ?: "",
-        image = posterUrl ?: "",
-        issueYear = year ?: 0,
-        genre = genres?.toString() ?: "",
-        description = description ?: "",
-        country = countries?.toString() ?: ""
+
+    data class Genre(
+        val genre: String = ""
     )
+    data class Country(
+        val country: String = ""
+    )
+
+//    fun toDto() = Movie(
+//        id = kinopoiskId ?: 0,
+//        title = nameRu ?: "",
+//        image = posterUrl ?: "",
+//        issueYear = year ?: 0,
+//        genre = genres?.toString() ?: "",
+//        description = description ?: "",
+//        country = countries?.toString() ?: ""
+//    )
 }

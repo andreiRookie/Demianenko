@@ -1,6 +1,6 @@
 package com.andreirookie.moviesapp.stateModel
 
-import com.andreirookie.moviesapp.data.Movie
+import com.andreirookie.moviesapp.dto.Movie
 
 data class StateModel(
     val movies: List<Movie> = emptyList(),

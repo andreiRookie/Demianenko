@@ -4,12 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.andreirookie.moviesapp.data.Movie
+import com.andreirookie.moviesapp.dto.Movie
 import com.andreirookie.moviesapp.db.AppDb
 import com.andreirookie.moviesapp.db.LocalDbImpl
 import com.andreirookie.moviesapp.db.LocalDbInterface
-import com.andreirookie.moviesapp.network.MovieNetworkEntity
-import com.andreirookie.moviesapp.network.MovieNetworkMapper
+import com.andreirookie.moviesapp.util.MovieNetworkMapper
 import com.andreirookie.moviesapp.network.MovieNetworkResponse
 import com.andreirookie.moviesapp.repo.MovieRepoInMemory
 import com.andreirookie.moviesapp.repo.MovieRepository
@@ -28,15 +27,14 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
     val dataFromWeb: LiveData<StateModel>
         get() = _dataFromWeb
 
-    fun loadTop100() {
+    fun loadPopular() {
         _dataFromWeb.postValue(StateModel(loading = true))
 
         repositoryInMemory.getTopPopular(object : MovieRepository.MovieCallback<MovieNetworkResponse> {
-            override fun onSuccess(list: MovieNetworkResponse) {
-                println("list ${list.movies}")
+            override fun onSuccess(response: MovieNetworkResponse) {
                 _dataFromWeb.postValue(StateModel(
-                    movies = mapper.mapFromEntityList(list.movies),
-                    empty = list.movies.isEmpty()))
+                    movies = mapper.mapFromEntityList(response.movies),
+                    empty = response.movies.isEmpty()))
             }
 
             override fun onError(e: Exception) {
@@ -46,16 +44,8 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-
-
-
-
-    //    val data = repositoryInMemory.getTopPopular()
-    val dataFromLocalDb = repositoryLocal.getSaved()
-
-
     fun toLike(movie: Movie) {
-        repositoryLocal.add(movie)
+//        repositoryLocal.add(movie)
         repositoryInMemory.like(movie.id)
     }
 
@@ -64,9 +54,10 @@ class MovieViewModel(application: Application) : AndroidViewModel(application) {
         navigateToMovieFragEvent.value = movie
     }
 
-    fun showFavorites() = repositoryInMemory.showFavorite()
+    fun showFavorites() {
+        _dataFromWeb.postValue(StateModel(movies =repositoryLocal.getSaved() ))
+        repositoryInMemory.showFavorite()
+    }
     fun showAll() = repositoryInMemory.showAll()
-
-
 
 }

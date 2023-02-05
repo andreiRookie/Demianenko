@@ -2,19 +2,21 @@ package com.andreirookie.moviesapp.frags
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.andreirookie.moviesapp.R
 import com.andreirookie.moviesapp.adapter.MovieAdapter
 import com.andreirookie.moviesapp.adapter.OnInteractionListener
-import com.andreirookie.moviesapp.data.Movie
+import com.andreirookie.moviesapp.dto.Movie
 import com.andreirookie.moviesapp.databinding.FeedFragmentBinding
 import com.andreirookie.moviesapp.frags.MovieFragment.Companion.movieArg
 import com.andreirookie.moviesapp.viewModel.MovieViewModel
@@ -45,7 +47,7 @@ class FeedFragment : Fragment() {
 
             }
         )
-        viewModel.loadTop100()
+//        viewModel.loadPopular()
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
 //        viewModel.dataFromLocalDb.observe(viewLifecycleOwner) {
@@ -53,15 +55,13 @@ class FeedFragment : Fragment() {
 //        }
         viewModel.dataFromWeb.observe(viewLifecycleOwner) { state ->
             adapter.submitList(state.movies)
-            println("state.movies ${state.movies}")
-            println("state.loading ${state.loading}")
             binding.progressBar.isVisible= state.loading
             binding.errorGroup.isVisible = state.error
             binding.emptyText.isVisible = state.empty
         }
 
         binding.retryButton.setOnClickListener {
-            viewModel.loadTop100()
+            viewModel.loadPopular()
         }
 
 
@@ -92,16 +92,10 @@ class FeedFragment : Fragment() {
             R.color.blue_500,
             R.color.blue_700)
         swipeRefreshBinding.setOnRefreshListener {
-            viewModel.loadTop100()
+            viewModel.loadPopular()
             swipeRefreshBinding.isRefreshing = false
         }
 
-
-
         return binding.root
     }
-
-
-
-
 }

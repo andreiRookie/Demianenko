@@ -1,6 +1,6 @@
 package com.andreirookie.moviesapp.adapter
 
-import com.andreirookie.moviesapp.data.Movie
+import com.andreirookie.moviesapp.dto.Movie
 
 interface OnInteractionListener {
 

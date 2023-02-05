@@ -2,6 +2,7 @@ package com.andreirookie.moviesapp.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.andreirookie.moviesapp.R
@@ -17,11 +18,6 @@ class AppActivity : AppCompatActivity() {
         binding = ActivityAppBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        val navHostFragment =
-//            supportFragmentManager
-//                .findFragmentById(R.id.nav_host_fragment_container_view) as NavHostFragment
-
-//        val navController = navHostFragment.navController
 
     }
 }

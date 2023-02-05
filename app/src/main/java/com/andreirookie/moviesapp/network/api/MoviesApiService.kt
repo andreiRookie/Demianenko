@@ -1,7 +1,5 @@
 package com.andreirookie.moviesapp.network.api
 
-import com.andreirookie.moviesapp.data.Movie
-import com.andreirookie.moviesapp.network.MovieNetworkEntity
 import com.andreirookie.moviesapp.network.MovieNetworkResponse
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -19,8 +17,6 @@ private val loggingInterceptor = HttpLoggingInterceptor().apply {
     HttpLoggingInterceptor.Level.BODY.also { this.level = it }
 }
 
-
-
 private val okHttpClient = OkHttpClient.Builder()
     .addInterceptor(loggingInterceptor)
     .build()
@@ -34,7 +30,7 @@ private val retrofit = Retrofit.Builder()
 interface MoviesApiService {
     @Headers("X-API-KEY: $API_KEY")
     @GET(value = "/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS")
-    fun getTop100Popular(): Call<MovieNetworkResponse>
+    fun getTopPopular(): Call<MovieNetworkResponse>
 
 //    @GET("films")
 //    fun getTopFilms(): Call<List<MovieNetworkEntity>>

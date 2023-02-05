@@ -2,7 +2,7 @@ package com.andreirookie.moviesapp.util
 
 
 import android.os.Bundle
-import com.andreirookie.moviesapp.data.Movie
+import com.andreirookie.moviesapp.dto.Movie
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 

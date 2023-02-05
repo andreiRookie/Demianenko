@@ -3,8 +3,7 @@ package com.andreirookie.moviesapp.repo
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.andreirookie.moviesapp.network.api.MoviesApiObj
-import com.andreirookie.moviesapp.data.Movie
-import com.andreirookie.moviesapp.network.MovieNetworkEntity
+import com.andreirookie.moviesapp.dto.Movie
 import com.andreirookie.moviesapp.network.MovieNetworkResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -13,7 +12,6 @@ import retrofit2.Response
 class MovieRepoInMemory : MovieRepository {
 
     private var uniqueId = 0
-
     private var movies = listOf<Movie>()
     init {
         repeat(10) {
@@ -33,7 +31,7 @@ class MovieRepoInMemory : MovieRepository {
     }
 
     override fun getTopPopular(callback: MovieRepository.MovieCallback<MovieNetworkResponse>) {
-        MoviesApiObj.retrofitService.getTop100Popular().enqueue(object  : Callback<MovieNetworkResponse> {
+        MoviesApiObj.retrofitService.getTopPopular().enqueue(object  : Callback<MovieNetworkResponse> {
             override fun onResponse(
                 call: Call<MovieNetworkResponse>,
                 response: Response<MovieNetworkResponse>
@@ -50,9 +48,6 @@ class MovieRepoInMemory : MovieRepository {
             }
         })
     }
-
-
-
 
     override fun like(movieId: Int) {
         movies = movies.map {

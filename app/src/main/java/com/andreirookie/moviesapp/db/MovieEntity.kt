@@ -2,7 +2,7 @@ package com.andreirookie.moviesapp.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.andreirookie.moviesapp.data.Movie
+import com.andreirookie.moviesapp.dto.Movie
 
 @Entity
 data class MovieEntity(
@@ -11,8 +11,8 @@ data class MovieEntity(
     val title: String,
     val image: String,
     val issueYear: Int,
-    val genre: String,
-    val country: String ,
+    val genre: String="",
+    val country: String="",
     val description: String,
     val isLiked: Boolean
 ) {
