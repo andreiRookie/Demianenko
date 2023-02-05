@@ -4,7 +4,7 @@ package com.andreirookie.moviesapp.data
 import java.io.Serializable
 
 data class Movie(
-    val id: Long,
+    val id: Int,
     val title: String,
     val image: String = "Image",
     val issueYear: Int = 0,

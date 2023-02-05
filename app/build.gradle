@@ -53,6 +53,7 @@ dependencies {
     testImplementation "androidx.arch.core:core-testing:$arch_version"
     implementation "androidx.activity:activity-ktx:1.5.1"
 
+    //RecyclerView
     def recyclerview_version = "1.2.1"
     implementation "androidx.recyclerview:recyclerview:$recyclerview_version"
 
@@ -74,19 +75,26 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
 
+    //Room DB
     def room_version = "2.4.3"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-// fireBase
-    implementation platform('com.google.firebase:firebase-bom:30.3.2')
-    implementation 'com.google.firebase:firebase-messaging-ktx'
-
-    def play_services_base_version = "18.1.0"
-    implementation "com.google.android.gms:play-services-base:$play_services_base_version"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:1.7.10"
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
+
+//    def gson_version = "2.9.1"
+//    implementation "com.google.code.gson:gson:$gson_version"
+
+
+    def okhttp_version = "4.10.0"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+
 }

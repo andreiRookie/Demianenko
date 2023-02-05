@@ -23,8 +23,9 @@ abstract class AppDb :RoomDatabase()  {
         private fun buildDb(context: Context) : AppDb {
             return Room.databaseBuilder(context, AppDb::class.java,"app.db")
                 .fallbackToDestructiveMigration()
+                .allowMainThreadQueries()
                 .build()
-//                .allowMainThreadQueries()
+
 
 
         }

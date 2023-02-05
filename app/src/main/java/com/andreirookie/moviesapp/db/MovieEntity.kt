@@ -7,10 +7,10 @@ import com.andreirookie.moviesapp.data.Movie
 @Entity
 data class MovieEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long,
+    val id: Int,
     val title: String,
     val image: String,
-    val issueYear: Int = 0,
+    val issueYear: Int,
     val genre: String,
     val country: String ,
     val description: String,

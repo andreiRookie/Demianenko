@@ -1,9 +1,11 @@
 package com.andreirookie.moviesapp.frags
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +23,7 @@ class FeedFragment : Fragment() {
 
     private val viewModel by viewModels<MovieViewModel>(ownerProducer = ::requireParentFragment)
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,12 +45,25 @@ class FeedFragment : Fragment() {
 
             }
         )
-
+        viewModel.loadTop100()
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = adapter
-        viewModel.data.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
+//        viewModel.dataFromLocalDb.observe(viewLifecycleOwner) {
+//            adapter.submitList(it)
+//        }
+        viewModel.dataFromWeb.observe(viewLifecycleOwner) { state ->
+            adapter.submitList(state.movies)
+            println("state.movies ${state.movies}")
+            println("state.loading ${state.loading}")
+            binding.progressBar.isVisible= state.loading
+            binding.errorGroup.isVisible = state.error
+            binding.emptyText.isVisible = state.empty
         }
+
+        binding.retryButton.setOnClickListener {
+            viewModel.loadTop100()
+        }
+
 
         val simpleItemAnimator = binding.recyclerView.itemAnimator as SimpleItemAnimator
         simpleItemAnimator.supportsChangeAnimations = false
@@ -61,13 +77,24 @@ class FeedFragment : Fragment() {
 
         binding.favoriteButton.setOnClickListener{
             viewModel.showFavorites()
+            binding.screenTitleTextView.text = "Избранное"
         }
 
         binding.popularButton.setOnClickListener {
             viewModel.showAll()
+            binding.screenTitleTextView.text = "Популярное"
         }
 
 
+        val swipeRefreshBinding = binding.swipeRefreshLayout
+        swipeRefreshBinding.setColorSchemeColors(
+            R.color.blue_200,
+            R.color.blue_500,
+            R.color.blue_700)
+        swipeRefreshBinding.setOnRefreshListener {
+            viewModel.loadTop100()
+            swipeRefreshBinding.isRefreshing = false
+        }
 
 
 

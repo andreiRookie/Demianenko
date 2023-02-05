@@ -9,7 +9,7 @@ class LocalDbImpl(
     private val dao: MovieDao
 ) : LocalDbInterface {
 //    private val savedData = dao.getAllSaved()
-    override fun removeById(movieId: Long) {
+    override fun removeById(movieId: Int) {
         dao.remove(movieId)
     }
 
